@@ -52,7 +52,5 @@ document.addEventListener('DOMContentLoaded', () => {
       // Append the clone to the list
       list.appendChild(i);
     }
-  }).then(()=>{
-    console.log(hiddenInput.getAttribute('value'))
-  });
+  })();
 });
