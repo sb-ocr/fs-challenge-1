@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const dropdown = document.querySelector('[data-element="dropdown"]') as HTMLElement;
   const list = document.querySelector('[data-element="list"]') as HTMLElement;
   const item = document.querySelector('[data-element="item"]') as HTMLElement;
-  const hiddenInput = document.querySelector('input[name="countryCode"]') as HTMLElement;
+  const hiddenInput = document.querySelector('input[name="countryCode"]') as HTMLInputElement;
 
   (async () => {
     list.innerHTML = '';
@@ -52,5 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Append the clone to the list
       list.appendChild(i);
     }
-  })();
+  }).then(()=>{
+    console.log(hiddenInput.getAttribute('value'))
+  });
 });
