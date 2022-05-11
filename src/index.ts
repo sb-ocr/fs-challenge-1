@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Populating the item clone
       (i.querySelector('[data-element="value"]') as HTMLElement).innerHTML = country.cca2;
       (i.querySelector('img') as HTMLImageElement).src = country.flags.svg;
+      (i.querySelector('img') as HTMLImageElement).alt = country.name.common + ' Flag';
       i.title = country.name.common;
       i.setAttribute('aria-title', country.name.common);
       // Attach click event listener
