@@ -50,6 +50,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Set default location onload
     (document.querySelector('[data-element="item"][data-cca2="' + location + '"]') as HTMLAnchorElement).click();
+
+    // Observe class change for dropdown open state
+    const observer = new MutationObserver((e) => {
+      e.forEach(function (mutation) {
+        if ((mutation.target as HTMLElement).classList.contains('w--open')) {
+          // Get the current selection
+          const selected = document.querySelector('.w--current') as HTMLElement;
+          let focused = selected;
+
+          // Scroll into view and center
+          selected.focus();
+          list.scrollTop = selected.offsetTop + selected.offsetHeight / 2 - list.offsetHeight / 2;
+
+          // Listen for keyboard navigation
+          list.addEventListener('keydown', function (e) {
+            switch (e.code) {
+              case 'ArrowUp':
+                focused = focused.previousElementSibling as HTMLElement;
+                focused.focus();
+                break;
+              case 'ArrowDown':
+                focused = focused.nextElementSibling as HTMLElement;
+                focused.focus();
+                break;
+              case 'Tab':
+                e.preventDefault();
+                focused = focused.nextElementSibling as HTMLElement;
+                focused.focus();
+                break;
+              case 'Space':
+                e.preventDefault();
+                focused.click();
+                break;
+            }
+          });
+        }
+      });
+    });
+
+    observer.observe(dropdown.querySelector('.w-dropdown-toggle') as HTMLElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+      childList: false,
+      characterData: false,
+    });
   })();
 });
 
